@@ -20,41 +20,20 @@
     </main>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script>
-      if (navigator.bluetooth) {
-        alert("244");
+      var options = {
+        filters: [
+          {name: 'democracy'}
+        ],
+        optionalServices: ['democracy']
       }
-      var myDevice;
-      navigator.bluetooth.requestDevice({
-        acceptAllDevices: true
-      })
-      .then(function(device) {
-        alert("device");
-        console.log(device);
-        return device.gatt.connect();
-      })
-      .then(function(server) {
-        return server.getPrimaryService(myService);
-      })
-      .then(function(service) {
-        return service.getCharacteristics();
-      })
-      .then(function(characteristics) {
-        for (c in characteristics) {
-          characteristics[c].startNotifications()
-          .then(subscribeToChanges);
-        }
+      navigator.bluetooth.requestDevice(options).then(function(device) {
+        alert('Name: ' + device.name);
+        // Do something with the device.
       })
       .catch(function(error) {
-        console.error('Connection failed!', error);
+        alert("Something went wrong. " + error);
       });
 
-      function subscribeToChanges(characteristic) {
-        characteristic.oncharacteristicvaluechanged = handleData;
-      }
-      function handleData(event) {
-        var buf = new Uint8Array(event.target.value);
-        alert(buf);
-      }
       var msg = "aaa";
       $('#messages').append($('<li>').text(msg));
       $('#messages_').scrollTop($('#messages_')[0].scrollHeight);
