@@ -25,11 +25,9 @@
       }
       var myDevice;
       navigator.bluetooth.requestDevice({
-        //filters: [{name: 'democracy'}],
         acceptAllDevices: true
       })
       .then(function(device) {
-        myDevice = device;
         alert("device");
         console.log(device);
         return device.gatt.connect();
