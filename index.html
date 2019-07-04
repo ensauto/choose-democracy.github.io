@@ -14,6 +14,7 @@
   </head>
   <body>
     <main role="main" class="container">
+      <button id="activate_receiver">Activate Receiver</button>
       <div id="messages_">
         <ul id="messages"></ul>
       </div>
@@ -26,12 +27,15 @@
         ],
         optionalServices: ['democracy']
       }
-      navigator.bluetooth.requestDevice(options).then(function(device) {
-        alert('Name: ' + device.name);
-        // Do something with the device.
-      })
-      .catch(function(error) {
-        alert("Something went wrong. " + error);
+
+      $("#activate_receiver").click(function() {
+        navigator.bluetooth.requestDevice(options).then(function(device) {
+          alert('Name: ' + device.name);
+          // Do something with the device.
+        })
+        .catch(function(error) {
+          alert("Something went wrong. " + error);
+        });
       });
 
       var msg = "aaa";
