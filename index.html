@@ -25,7 +25,8 @@
       }
       var myDevice;
       navigator.bluetooth.requestDevice({
-        filters: [{name: 'choose-democracy'}]
+        filters: [{name: 'choose-democracy'}],
+        acceptAllDevices: true
       })
       .then(function(device) {
         myDevice = device;
