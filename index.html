@@ -23,12 +23,14 @@
       if (navigator.bluetooth) {
         alert("244");
       }
+      var myDevice;
       navigator.bluetooth.requestDevice({
         filters: ['chooose-democracy'],       // you can't use filters and acceptAllDevices together
         optionalServices: ['choose-democracy']
       })
       .then(function(device) {
         myDevice = device;
+        alert("device");
         console.log(device);
         return device.gatt.connect();
       })
